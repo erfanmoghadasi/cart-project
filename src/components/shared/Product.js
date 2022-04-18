@@ -7,7 +7,7 @@ const Product = ({productsData}) => {
         <div>
             <img alt='product' src={productsData.image} style={{width:'200px'}} />
             <h3>{shorten(productsData.title)}</h3>
-            <p>{productsData.price}</p>
+            <p>{productsData.price} $</p>
             <div>
                 <Link to={`/products/${productsData.id}`}>details</Link>
                 </div>

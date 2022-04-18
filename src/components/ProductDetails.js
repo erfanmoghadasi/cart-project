@@ -18,7 +18,7 @@ const ProductDetail = () => {
           <p><span>category : </span>{category}</p>
       </div>
       <div>
-          <span>{price}</span>
+          <span>{price} $</span>
           <Link to='/products'>Back to Shop</Link>
       </div>
     </div>
