@@ -5,7 +5,7 @@ const shorten = (title) => {
 };
 
 const isInCart = (state , id) => {
-  return state.selectedItems.find(item => item.id === id);
+  return !!state.selectedItems.find(item => item.id === id);
 
 }
 
@@ -14,7 +14,7 @@ const quantityCount = (state , id) => {
   if(index === -1) {
     return false
   }else{
-    return state.selectedItems.quantity[index]
+    return state.selectedItems[index].quantity
   }
 }
 

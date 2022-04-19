@@ -2,12 +2,13 @@ import React, { createContext, useReducer } from "react";
 
 const initialState = {
   selectedItems: [],
-  quantity: 0,
+  itemCounter: 0,
   total: 0,
   checkout: false,
 };
 
 const cartReducer = (state , action) => {
+    console.log(state);
     switch(action.type){
         case 'ADD_ITEM':
             if(!state.selectedItems.find( item => item.id === action.payload.id )){
@@ -16,16 +17,16 @@ const cartReducer = (state , action) => {
                     quantity: 1
                 })
             }
-            return({
+            return{
                 ...state,
                 selectedItems: [...state.selectedItems]
-            })
+            }
         case 'REMOVE_ITEM':
             const newSelectedItems = state.selectedItems.filter(item => item.id !== action.payload.id);
-            return ({
+            return {
                 ...state,
                 selectedItems : [...newSelectedItems]
-            })
+            }
         case 'INCREASE':
             const indexI = state.selectedItems.findIndex(item => item.id === action.payload.id);
             state.selectedItems[indexI].quantity++;
@@ -34,7 +35,7 @@ const cartReducer = (state , action) => {
             })
         case 'DECREASE':
             const indexD = state.selectedItems.findIndex(item => item.id === action.payload.id);
-            state.selectedItems[indexD].quantity++;
+            state.selectedItems[indexD].quantity--;
             return({
                 ...state
             })
@@ -52,15 +53,15 @@ const cartReducer = (state , action) => {
     }
 }
 
-export const cartContext = createContext()
+export const CartContext = createContext()
 
 const CartContextProvider = ({children}) => {
   const [state, dispatch] = useReducer(cartReducer, initialState);
 
   return (
-      <cartContext.Provider value={{state, dispatch}}>
+      <CartContext.Provider value={{state, dispatch}}>
           {children}
-      </cartContext.Provider>
+      </CartContext.Provider>
   );
 };
 
